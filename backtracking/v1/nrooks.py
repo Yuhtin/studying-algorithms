@@ -1,6 +1,5 @@
 n = int(input())
-
-columns = []
+columns = [False]*n
 
 def dfs(line):
     if line == n:        
@@ -8,10 +7,10 @@ def dfs(line):
     
     res = 0
     for column in range(n):
-        if column not in columns:
-            columns.append(column)
+        if not columns[column]:
+            columns[column] = True
             res += dfs(line + 1)
-            columns.pop()
+            columns[column] = False
     
     return res
 
