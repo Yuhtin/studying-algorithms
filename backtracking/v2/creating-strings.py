@@ -1,25 +1,26 @@
-characters = list(input())
+characters = sorted(input())
 n = len(characters)
 
-permutations = set()
+permutations = []
 
 def dfs(text, used):
-    if len(text) == len(characters):
-        permutations.add(text)
+    if len(text) == n:
+        permutations.append(text)
         return
-    
+
     for i in range(n):
         if used[i]:
             continue
-                
+
         if i > 0 and characters[i] == characters[i-1] and not used[i-1]:
             continue
-        
+
         used[i] = True
-        dfs(text + characters[i], used.copy())
+        dfs(text + characters[i], used)
         used[i] = False
-    
-dfs("", [False]*n)
+
+dfs("", [False] * n)
+
 print(len(permutations))
-for i in permutations:
-    print(i)
+for p in permutations:
+    print(p)

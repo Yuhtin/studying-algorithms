@@ -4,17 +4,20 @@ class Solution:
 
         def backtracking(linha):
             if linha == n:
-                return 1
-
-            solucoes = 0
+                return True
 
             for coluna in range(n):
+                if tabuleiro[linha][coluna] == "*":
+                    continue
+                
                 if isValid(linha, coluna):
                     tabuleiro[linha] = coluna
-                    solucoes += backtracking(linha + 1)
+                    if backtracking(linha + 1):
+                        return True
+                    
                     tabuleiro[linha] = -1
 
-            return solucoes
+            return False
 
         def isValid(linha, coluna):
             for line in range(linha):
